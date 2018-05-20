@@ -27,3 +27,37 @@
 集合内可放置任意文档，这是与关系型数据库显著的不同。
 
 虽然mongodb的一个集合内可放置任何文档，但通常会将同种类型的文档放在一个集合里，这样会使数据更加集中，操作也更加方便。
+
+## 数据库
+
+每个数据库都有独立的权限
+
+在磁盘上，每个数据库也放置在不同的文件中。
+
+数据库最终会以文件系统中的文件存在，而数据库名就是相应的文件名，因此数据库名称有很多的限制。
+
+## MongoDB shell
+
+### 创建
+
+new_doc = {'name': 'zq', 'age': 12}
+
+db.new_collection.insert(new_doc)
+
+### 读取
+
+db.new_collection.find()
+
+db.new_collection.findOne()
+
+### 更新
+
+new_doc = {'name': 'zq', 'age': 12}
+
+new_doc.age = 20
+
+db.new_collection.update({'name': 'zq'}, new_doc)
+
+### 删除
+
+db.new_collection.remove({'name': 'zq'})
