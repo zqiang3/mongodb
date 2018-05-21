@@ -38,19 +38,19 @@
 
 ## MongoDB shell
 
-### 创建
+**创建**
 
 new_doc = {'name': 'zq', 'age': 12}
 
 db.new_collection.insert(new_doc)
 
-### 读取
+**读取**
 
 db.new_collection.find()
 
 db.new_collection.findOne()
 
-### 更新
+**更新**
 
 new_doc = {'name': 'zq', 'age': 12}
 
@@ -58,7 +58,7 @@ new_doc.age = 20
 
 db.new_collection.update({'name': 'zq'}, new_doc)
 
-### 删除
+**删除**
 
 db.new_collection.remove({'name': 'zq'})
 
