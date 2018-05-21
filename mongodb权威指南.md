@@ -61,3 +61,17 @@ db.new_collection.update({'name': 'zq'}, new_doc)
 ### 删除
 
 db.new_collection.remove({'name': 'zq'})
+
+## 数据类型
+
+* null
+* 布尔型：true和false
+* 数值：默认使用64位浮点型数值
+* 字符串
+* 日期：新纪元以来经过的毫秒数，不存储时区
+* 正则表达式
+* 数组：{"x": ["a", "b", "c"]}
+* 内嵌文档：{"x": {"foo": "bar"}}
+* 对象id：是一个12字节的ID，文档的唯一标识。
+* 二进制数据：将非UTF-8字符保存到数据库，二进制数据是唯一的方式。
+* 代码：可包含JavaScript代码
