@@ -62,6 +62,52 @@ db.new_collection.update({'name': 'zq'}, new_doc)
 
 db.new_collection.remove({'name': 'zq'})
 
+**使用shell连接mongo实例**
+
+```shell
+mongo 127.0.0.1:27017/test -uuser -ppwd
+# 不连接数据库
+mongo --nodb
+
+conn = new Mongo('127.0.0.1:27017')
+db = conn.getDB('test')
+db.auth('user', 'pwd')
+```
+
+**shell帮助**
+
+```javascript
+help
+db.help()
+db.coll.help()
+show dbs
+show collections
+show users
+db.coll.update  // 查看函数的实现代码
+```
+
+**.mongorc.js文件**
+
+这个文件会在启动shell时自动运行。
+
+可在.mongorc.js里重写某些方法，移除危险函数
+
+```javascript
+var no = function(){
+    print("Not on my watch.");
+};
+
+db.dropDatabase = DB.prototype.dropDatabase = no;  // 禁止删除数据库
+DBCollection.prototype.drop = no;                  // 禁止删除集合
+DBCollection.prototype.dropIndex = no;             // 禁止删除索引
+```
+
+如果在启动shell时指定--norc参数，就可以禁止加载.mongorc.js
+
+**定制shell提示**
+
+**编辑复合变量**
+
 ## 数据类型
 
 * null
@@ -78,6 +124,8 @@ db.new_collection.remove({'name': 'zq'})
 
 ## _id和ObjectId
 
+[ObjectId 官方链接](https://docs.mongodb.com/manual/reference/bson-types/#objectid)
+
 **ObjectId**
 
 ObjectId使用12字节的存储空间，每个字节两位十六进制数字，是一个24位的字符串。
@@ -86,10 +134,17 @@ ObjectId使用12字节的存储空间，每个字节两位十六进制数字，�
 
 接下来3个字节是主机的唯一标识符，通常是主机名的散列值。
 
-接下来2个字节是产生ObjectId的**PID**，确保同一台机器并发产生的id是唯一的。
+接下来2个字节是产生ObjectId的进程**PID**，确保同一台机器并发产生的id是唯一的。
 
 最后3个字节是自增计数器，确保相同进程同一秒钟产生的id是唯一的。
 
 **自动生成id**
 
 ObjectId是由客户端生成的！如果插入文档的时候没有”_id”键，系统会帮你自动创建一个。可以由MongoDB服务器来做这件事情，但通常会在客户端由驱动程序完成。
+
+**根据_id查看文档创建时间**
+
+```javascript
+ObjectId("577d025056f08b9cdd727d97").getTimestamp()
+```
+
