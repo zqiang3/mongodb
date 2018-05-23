@@ -148,3 +148,26 @@ ObjectId是由客户端生成的！如果插入文档的时候没有”_id”键
 ObjectId("577d025056f08b9cdd727d97").getTimestamp()
 ```
 
+# 第三章
+
+## 插入文档
+
+本书版本的mongodb单条消息最大数据量限制为48M
+
+### 批量插入
+
+```javascript
+db.products.insert(
+   [
+     { _id: 11, item: "pencil", qty: 50, type: "no.2" },
+     { item: "pen", qty: 20 },
+     { item: "eraser", qty: 25 }
+   ]
+)
+```
+
+
+
+### insert和save的区别
+
+如果插入文档的_id值，在collection中已经存在，使用insert插入将会报异常，用save操作会覆盖掉原来的值。
